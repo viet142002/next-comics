@@ -1,0 +1,26 @@
+import CardComic from "~/components/card/CardComic";
+import { ComicData } from "~/types";
+
+interface GroupComicProps {
+    title: string;
+    comics: Array<ComicData>;
+    domainImage: string;
+}
+function GroupComic({ title, comics, domainImage }: GroupComicProps) {
+    return (
+        <section>
+            <h2 className='line-clamp-2'>{title}</h2>
+            <div>
+                <ul className='grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-4'>
+                    {comics.map(comic => (
+                        <li key={comic._id}>
+                            <CardComic comic={comic} domain_cdn={domainImage} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
+    );
+}
+
+export default GroupComic;

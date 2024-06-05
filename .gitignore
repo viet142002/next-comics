@@ -9,12 +9,19 @@
 # testing
 /coverage
 
+
+
 # next.js
 /.next/
 /out/
 
 # production
 /build
+
+# workbox
+/public/sw*
+/public/workbox-*
+/public/fallback*
 
 # misc
 .DS_Store
