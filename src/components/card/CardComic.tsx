@@ -27,7 +27,7 @@ function CardComic({ comic, domain_cdn }: CardComicProps) {
                 {comic.chaptersLatest.map(chapter => (
                     <li
                         key={chapter.chapter_name}
-                        className='px-2 py-1 rounded-xl text-sm bg-black/10 inline-block'
+                        className='px-2 py-1 rounded-full text-sm bg-gray-200 inline-block'
                     >
                         <Link href={createLinkDetail(comic, chapter)}>
                             {chapter.chapter_name}

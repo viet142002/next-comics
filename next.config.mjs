@@ -38,6 +38,10 @@ export default withPWA({
                 source: "/truyen-tranh/:slug/:chapter",
                 destination: `/detail`,
             },
+            {
+                source: "/tim-kiem",
+                destination: `/search`,
+            },
         ];
     },
 });

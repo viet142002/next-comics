@@ -15,7 +15,7 @@ class InstantsApi {
     private buildUrl(path?: string, params?: Record<string, any>) {
         if (!path) return this.url;
         if (!params) return this.url + path;
-        const newUrl = new URL(this.url + path);
+        const newUrl = this.url + path;
 
         const searchParams = new URLSearchParams(params);
         return `${newUrl}?${searchParams.toString()}`;

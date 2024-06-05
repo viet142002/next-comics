@@ -11,7 +11,6 @@ export const useAuth = () => {
                 email,
                 password,
             });
-            console.log(res);
         } catch (error) {
             console.log(error);
         }
