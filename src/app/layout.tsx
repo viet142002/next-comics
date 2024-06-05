@@ -8,6 +8,7 @@ import { cn } from "~/lib/utils";
 import { Toaster } from "~/components/ui/toaster";
 import StoreProvider from "~/redux/StoreProvider";
 import { getCookie } from "~/helpers/server";
+import Header from "~/components/layouts/headers";
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
                         },
                     }}
                 >
+                    <Header />
                     {children}
                 </StoreProvider>
                 <Toaster />
