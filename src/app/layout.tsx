@@ -15,9 +15,9 @@ const fontSans = FontSans({
     variable: "--font-sans",
 });
 
-const APP_NAME = "Truyện Tranh";
-const APP_DEFAULT_TITLE = "Truyện Tranh";
-const APP_TITLE_TEMPLATE = "%s - Truyện Tranh";
+const APP_NAME = "Next Comics";
+const APP_DEFAULT_TITLE = "Next Comics";
+const APP_TITLE_TEMPLATE = "%s - Next Comics";
 const APP_DESCRIPTION =
     "Truyện tranh hay nhất, mới nhất, đọc truyện tranh online, truyện tranh full, truyện tranh tiếng việt, update liên tục";
 

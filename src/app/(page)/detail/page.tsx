@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 
 import { Container } from "~/components/common";
+import { generateMeta } from "~/helpers/server";
 import { DetailApi, InformationApi } from "~/services";
 const Content = dynamic(() => import("~/components/detail/Content"));
 const Action = dynamic(() => import("~/components/detail/Action"));
@@ -12,14 +13,10 @@ export async function generateMetadata({ searchParams }: any) {
     const chapter = await DetailApi.getData(searchParams.api);
     const comic = await InformationApi.getData(searchParams.slug);
 
-    return {
-        title: comic.seoOnPage.titleHead + chapter.item.chapter_name,
-        description: comic.seoOnPage.descriptionHead,
-        image:
-            comic.APP_DOMAIN_CDN_IMAGE +
-            "/uploads/" +
-            comic.seoOnPage.og_image[0],
-    };
+    return generateMeta(comic.seoOnPage, {
+        titleHead: comic.seoOnPage.titleHead + chapter.item.chapter_name,
+        APP_DOMAIN_CDN_IMAGE: comic.APP_DOMAIN_CDN_IMAGE,
+    });
 }
 async function DetailPage({ searchParams }: { searchParams: any }) {
     if (!searchParams.api || !searchParams.slug) {

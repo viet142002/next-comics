@@ -4,6 +4,7 @@ import { Container } from "~/components/common";
 import { Pagination } from "~/components/common";
 import GroupComic from "~/components/common/GroupComic";
 import Content from "~/components/search/Content";
+import { generateMeta } from "~/helpers/server";
 import { DetailApi, InformationApi, SearchApi } from "~/services";
 
 export async function generateMetadata({ searchParams }: any) {
@@ -12,20 +13,14 @@ export async function generateMetadata({ searchParams }: any) {
     }
     const search = await SearchApi.search(searchParams.keyword);
 
-    // random number from 0 to search.seoOnPage.og_image.length
-    const random = Math.floor(Math.random() * search.seoOnPage.og_image.length);
-
-    return {
-        title: "Đọc truyện | Truyện tranh hay | Tuyển tập truyện tranh mới nhất 2024",
-        description:
-            "Đọc truyện tranh online, truyện tranh tiếng việt mới nhất, tuyển tập truyện tranh hay nhất và cập nhật liên tục truyện tranh mới.",
-        keywords:
-            "đọc truyện, truyện tranh, truyện tranh online, truyện tranh mới",
-        image:
-            search.APP_DOMAIN_CDN_IMAGE +
-            "/uploads/" +
-            search.seoOnPage.og_image[random],
-    };
+    return generateMeta(search.seoOnPage, {
+        titleHead:
+            "Đọc truyện | Truyện tranh hay | Tuyển tập truyện tranh mới nhất 2024 tại Next Comics",
+        APP_DOMAIN_CDN_IMAGE: search.APP_DOMAIN_CDN_IMAGE,
+        descriptionHead:
+            "Đọc truyện tranh online, truyện tranh tiếng việt mới nhất, tuyển tập truyện tranh hay nhất và cập nhật liên tục truyện tranh mới tại Next Comics.",
+        extendKeyword: searchParams.keyword,
+    });
 }
 async function SearchPage({ searchParams }: { searchParams: any }) {
     if (!searchParams.keyword) {

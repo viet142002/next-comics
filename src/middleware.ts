@@ -1,10 +1,23 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getCookie } from "~/helpers/server";
+import { NextResponse } from "next/server";
 
-export function middleware(response: NextResponse) {
-    return NextResponse.next();
+export function middleware(request: Request) {
+    const url = new URL(request.url);
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set("x-url", request.url);
+    requestHeaders.set("x-protocol", url.protocol);
+    requestHeaders.set("x-port", url.port);
+    requestHeaders.set("x-host", url.host);
+    requestHeaders.set("x-domain", url.protocol + "//" + url.host);
+    requestHeaders.set("x-pathname", url.pathname);
+    requestHeaders.set("x-search", url.search);
+
+    return NextResponse.next({
+        request: {
+            headers: requestHeaders,
+        },
+    });
 }
 
 export const config = {
-    matcher: ["/api/auth/login", "/api/auth/logout", "/api/auth/me"],
+    matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
