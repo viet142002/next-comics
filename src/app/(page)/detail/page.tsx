@@ -3,8 +3,12 @@ import dynamic from "next/dynamic";
 import { Container } from "~/components/common";
 import { generateMeta } from "~/helpers/server";
 import { DetailApi, InformationApi } from "~/services";
-const Content = dynamic(() => import("~/components/detail/Content"));
+import Content from "~/components/detail/Content";
+const ListChapterInDetail = dynamic(
+    () => import("~/components/detail/ListChapterInDetail")
+);
 const Action = dynamic(() => import("~/components/detail/Action"));
+import { Suspense } from "react";
 
 export async function generateMetadata({ searchParams }: any) {
     if (!searchParams.api || !searchParams.slug) {
@@ -22,11 +26,13 @@ async function DetailPage({ searchParams }: { searchParams: any }) {
     if (!searchParams.api || !searchParams.slug) {
         return null;
     }
-    const chapter = await DetailApi.getData(searchParams.api);
-    const comic = await InformationApi.getData(searchParams.slug);
+    const fetchChapter = DetailApi.getData(searchParams.api);
+    const fetchComic = InformationApi.getData(searchParams.slug);
+
+    const [chapter, comic] = await Promise.all([fetchChapter, fetchComic]);
 
     return (
-        <main className='py-4'>
+        <main>
             <Container className='max-w-full'>
                 <Action
                     comic={comic.item}
@@ -41,6 +47,10 @@ async function DetailPage({ searchParams }: { searchParams: any }) {
                     chapterName={chapter.item.chapter_name}
                 />
             </Container>
+            <ListChapterInDetail
+                comic={comic.item}
+                current={searchParams.chapter}
+            />
         </main>
     );
 }

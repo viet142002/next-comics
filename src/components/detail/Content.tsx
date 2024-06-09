@@ -1,4 +1,4 @@
-import { ImageCustom } from "~/components/common";
+import { ButtonScrollOnTop, ImageCustom } from "~/components/common";
 import { ComicDetailData } from "~/types";
 
 interface ContentProps {
@@ -8,7 +8,7 @@ interface ContentProps {
 
 function Content({ chapter, domain_cdn }: ContentProps) {
     return (
-        <section>
+        <section className='scroll-smooth'>
             {chapter.chapter_image.map((image, index) => (
                 <ImageCustom
                     domain_cdn={domain_cdn}
@@ -20,6 +20,7 @@ function Content({ chapter, domain_cdn }: ContentProps) {
                     alt={image.image_page}
                 />
             ))}
+            <ButtonScrollOnTop />
         </section>
     );
 }

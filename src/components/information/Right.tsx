@@ -1,4 +1,4 @@
-import { HtmlContent } from "~/components/common";
+import { Container, HtmlContent } from "~/components/common";
 import { ComicData } from "~/types";
 
 interface IProps {
@@ -7,8 +7,8 @@ interface IProps {
 
 function Right({ comic }: IProps) {
     return (
-        <div>
-            <h1 className='text-2xl font-bold'>{comic.name}</h1>
+        <section>
+            <h1 className='text-2xl font-bold py-2'>{comic.name}</h1>
             <div className='flex flex-wrap gap-3'>
                 <span>Thể loại:</span>
                 <ul className='flex gap-2 flex-wrap'>
@@ -32,7 +32,7 @@ function Right({ comic }: IProps) {
                 content={comic.content}
                 className='p-2 bg-gray-100 rounded-lg'
             />
-        </div>
+        </section>
     );
 }
 

@@ -1,11 +1,12 @@
 import dynamic from "next/dynamic";
 import { Container } from "~/components/common";
 
+const Actions = dynamic(() => import("~/components/information/Actions"));
+const InfoInMobile = dynamic(
+    () => import("~/components/information/InfoInMobile")
+);
 const ListChapter = dynamic(
-    () => import("~/components/information/ListChapter"),
-    {
-        ssr: false,
-    }
+    () => import("~/components/information/ListChapter")
 );
 const Left = dynamic(() => import("~/components/information/Left"));
 const Right = dynamic(() => import("~/components/information/Right"));
@@ -18,17 +19,23 @@ interface InformationContentProps {
 
 function InformationContent({ comic }: InformationContentProps) {
     return (
-        <Container>
-            <section className='flex flex-col md:flex-row gap-4'>
+        <>
+            <Container className='flex-col md:flex-row gap-4 hidden md:flex'>
                 <Left comic={comic} />
                 <div className='flex-1'>
                     <Right comic={comic} />
                 </div>
-            </section>
-            <section>
+            </Container>
+            <div className='md:hidden h-[40vh] overflow-hidden'>
+                <Left comic={comic} />
+            </div>
+            <section className='py-3 space-y-3 hidden md:block'>
+                <Actions comic={comic} />
                 <ListChapter comic={comic} />
             </section>
-        </Container>
+
+            <InfoInMobile comic={comic} />
+        </>
     );
 }
 

@@ -1,4 +1,4 @@
-import { ImageCustom } from "~/components/common";
+import { Container, ImageCustom } from "~/components/common";
 import { ComicData } from "~/types";
 
 interface IProps {

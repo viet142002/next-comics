@@ -3,10 +3,12 @@ import { combineReducers } from "redux";
 
 import authReducer from "~/redux/features/authSlice";
 import comicReducer from "~/redux/features/comicSlice";
+import commonReducer from "~/redux/features/commonSlice";
 
 export const rootReducer = combineReducers({
     auth: authReducer,
     comic: comicReducer,
+    common: commonReducer,
 });
 
 export const makeStore = () => {
